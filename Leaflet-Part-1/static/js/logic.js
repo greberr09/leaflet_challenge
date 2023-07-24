@@ -2,7 +2,7 @@
 // Display earthquake data for the last seven days, all earthquake types, from the U.S. 
 // Geological Survey.  See //https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php for
 // more information about the different feed types available.  Data is available for the past hour,
-// the past day, the past 7 days, and the past 30 days.  All are updated every 30 seconds.
+// the past day, the past 7 days, and the past 30 days.  All are updated every 5 minutes.
 // ----------------------------------------------------------------
 
 // Store the USGS seven-day API endpoint as the query url.
