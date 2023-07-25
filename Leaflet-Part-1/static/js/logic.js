@@ -38,18 +38,21 @@ function getMarkerColor(depth) {
 
 function createFeatures(earthquakeData) {
 
-  // Define a function to run once for each feature in the features array. 
+   // Define a function to run once for each feature in the earthquakes data. 
   function onEachFeature(feature, layer) {
-    //console.log("lng: " + feature.geometry.coordinates[1] + "lat: " + feature.geometry.coordinates[0] + "mag: " + feature.properties.mag);
-
-    // Give each feature a popup that describes the place and time of the earthquake and its depth and magnitude.
-    layer.bindPopup(`<h3>${feature.properties.place}</h3><hr><p>${new Date(feature.properties.time)}</p><p>Magnitude:  ${feature.properties.mag}</p><p>Depth:  ${feature.geometry.coordinates[2]}</p>`);
+  try {
+      // Give each feature a popup that describes the place and time of the earthquake and its depth and magnitude.
+      layer.bindPopup(`<h3>${feature.properties.place}</h3><hr><p>${new Date(feature.properties.time)}</p><p>Magnitude:  ${feature.properties.mag}</p><p>Depth:  ${feature.geometry.coordinates[2]}</p>`);
+  } catch (error) {
+      console.error("Error binding popup for earthquake:", error);
+      console.log("Feature:", feature);
+      console.log("Layer:", layer);
+    };  
   };
 
   // Create a GeoJSON layer that contains the features array on the earthquakeData object.
   // Call the onEachFeature function once for each piece of data 
   // Convert the point to a circle marker with appropriate radius and color
-
   let earthquakes = L.geoJSON(earthquakeData, {
     onEachFeature: onEachFeature,
     pointToLayer: (feature, latlng) => {

@@ -107,7 +107,8 @@ async function createFeatures(earthquakeData, plateURL) {
 //  was downloaded and served from a server running on local host.  In development, this was
 // Live Server, but an Express server could also be used with a short piece of javascript code.  
 // Alternatively, a proxy server could be used to make the request to GitHub, but that seemed beyond the scope of this assignment.
-  
+// The CORS handling in the fetchPlateData is derived from online research on Stack Overflow, as this
+// was not something we covered in a class activity.
 var plateData = await fetchPlateData(plateURL);
   if (plateData) {
     console.log("platedata");
@@ -130,7 +131,7 @@ var plateData = await fetchPlateData(plateURL);
 // Create the map with the earthquake layer, two basemap layers from Open Streets, and
 // three other basemap layers from other sources.  Let plates be null if not provided, in 
 // case the CORS call to the tectonic plates data is not successful.
-// create the map with the earthquake layers and two basemap layers from Open Streets.
+// Create the map with the earthquake layers and two basemap layers from Open Streets.
 function createMap(earthquakes, plates=null) {
 
   // Create the base layers.
@@ -187,12 +188,18 @@ function createMap(earthquakes, plates=null) {
   });
 
   // Create a layer control with the baseMaps and overlayMaps.
+  // The control layer handling is based 
+  // in part on leaflet documentation, in part on class activities, and in part on research 
+  // online in Stack Overflow.
   L.control.layers(baseMaps, overlayMaps, {
     collapsed: false
     // Add the layer control to the map.
   }).addTo(earthQuakeMap);
 
-  // function to build the legend 
+  // function to build the legend.  This relies on css to format the rectangular container
+  // for the legend and the individual rectangles in each category.  This method is based 
+  // in part on leaflet documentation, in part on class activities, and in part on research 
+  // online in Stack Overflow.
   function createLegend() {
     var legend = L.control({ position: 'bottomright' });
 
