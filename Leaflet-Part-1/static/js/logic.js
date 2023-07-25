@@ -17,7 +17,6 @@ d3.json(queryURL).then(function (data) {
   createFeatures(data.features);
 });
 
-
 // Function to determine marker color based on depth of the earthquake.
 function getMarkerColor(depth) {
   console.log("depth: " + depth);
@@ -103,42 +102,12 @@ function createMap(earthquakes) {
     layers: [streets, earthquakes]
   });
 
-  //L.legend.layers(baseMaps, overlayMaps, {
-  //  collapsed: false
-    // Add the layer control to the map.
-  //}).addTo(earthQuakeMap);
-
-
   // Create a layer control with the baseMaps and overlayMaps.
   L.control.layers(baseMaps, overlayMaps, {
     collapsed: false
     // Add the layer control to the map.
   }).addTo(earthQuakeMap);
 
-
-
-function createLegend() {
-  var legend = L.control({ position: 'bottomright' });
-
-  legend.onAdd = function (earthQuakeMap) {
-    var div = L.DomUtil.create('div', 'info legend');
-    labels = ['<strong>Depth</strong>'];
-
-     const magnitudes = ['-10-10','10-30','30-50','50-70','70-90', '90++']; 
-     const colors = ['lawngreen', 'mediumseagreen', 'gold', 'darkorange', 'hotpink', 'red']; 
-
-     for (let i = 0; i < magnitudes.length; i++) {
-       div.innerHTML +=
-         '<i style="background:' + colors[i] + '"></i> ' +
-         (magnitudes[i] ? magnitudes[i] + '<br>' : '+');
-         console.log(div.innerHTML);
-     }
-     div.innerHTML += labels.join('<br>');
-     return div;
-  };
-
-  legend.addTo(earthQuakeMap);
-}
 
 function createLegend() {
   var legend = L.control({ position: 'bottomright' });
